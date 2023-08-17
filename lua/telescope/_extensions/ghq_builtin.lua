@@ -10,7 +10,8 @@ local previewers = require "telescope.previewers"
 local utils = require "telescope.utils"
 local Path = require "plenary.path"
 
-local os_home = vim.loop.os_homedir()
+local uv = vim.uv or vim.loop
+local os_home = assert(uv.os_homedir())
 
 local M = {}
 
@@ -88,7 +89,7 @@ end
 M.list = function(opts)
   opts = opts or {}
   opts.bin = opts.bin and vim.fn.expand(opts.bin) or "ghq"
-  opts.cwd = utils.get_lazy_default(opts.cwd, vim.loop.cwd)
+  opts.cwd = utils.get_lazy_default(opts.cwd, uv.cwd)
   opts.entry_maker = utils.get_lazy_default(opts.entry_maker, gen_from_ghq, opts)
 
   local bin = vim.fn.expand(opts.bin)
