@@ -73,7 +73,7 @@ local function gen_from_ghq(opts)
       return path
     end)(entry.path)
 
-    return displayer { dir }
+    return displayer { utils.transform_path(opts, dir) }
   end
 
   return function(line)
