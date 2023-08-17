@@ -45,6 +45,7 @@ local sep = Path.path.sep
 local home = (function(h)
   return h .. (h:sub(-1) ~= sep and sep or "")
 end)(assert(Path.path.home))
+local basename_regex = (".*%s([^%s]+)"):format(sep, sep)
 
 local function replace_home(path)
   local start, finish = path:find(home, 1, true)
@@ -60,12 +61,12 @@ local function make_items(opts, path)
   end
   local transformed = utils.transform_path(opts, path)
   local replaced = replace_home(transformed)
-  local basename = replaced:match((".*%s([^%s]+)"):format(sep, sep))
-  if basename then
-    local parent = replaced:sub(1, #replaced - #basename)
-    return { { parent, "Directory" }, basename }
+  local basename = replaced:match(basename_regex)
+  if not basename then
+    return { "", replaced }
   end
-  return { "", replaced }
+  local parent = replaced:sub(1, #replaced - #basename)
+  return { { parent, "Directory" }, basename }
 end
 
 local displayer = entry_display.create {
