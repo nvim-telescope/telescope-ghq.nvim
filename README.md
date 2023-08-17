@@ -27,7 +27,7 @@ TODO: others
 
 ### list
 
-`:Telescope ghq list`
+`:Telescope ghq`
 
 Running `ghq list` and list repositories' paths. In default, it does actions below when you input keys.
 
@@ -46,7 +46,7 @@ Filepath for the binary `ghq`.
 
 ```vim
 " path can be expanded
-:Telescope ghq list bin=~/ghq
+:Telescope ghq bin=~/ghq
 ```
 
 #### `cwd`
