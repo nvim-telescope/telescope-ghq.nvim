@@ -9,12 +9,12 @@
 
 ```lua
 use{
-  'nvim-telescope/telescope.nvim',
+  "nvim-telescope/telescope.nvim",
   requires = {
-    'nvim-telescope/telescope-ghq.nvim',
+    "nvim-telescope/telescope-ghq.nvim",
   },
   config = function()
-    require'telescope'.load_extension'ghq'
+    require("telescope").load_extension "ghq"
   end,
 }
 ```
