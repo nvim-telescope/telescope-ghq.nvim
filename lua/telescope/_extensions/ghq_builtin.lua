@@ -73,7 +73,7 @@ local function gen_from_ghq(opts)
       return path
     end)(entry.path)
 
-    return displayer { dir }
+    return displayer { utils.transform_path(opts, dir) }
   end
 
   return function(line)
@@ -88,7 +88,8 @@ end
 
 M.list = function(opts)
   opts = opts or {}
-  opts.bin = opts.bin and vim.fn.expand(opts.bin) or "ghq"
+  opts.bin = opts.bin and vim.fn.expand(opts.bin) --[[@as string]]
+    or "ghq"
   opts.cwd = utils.get_lazy_default(opts.cwd, uv.cwd)
   opts.entry_maker = utils.get_lazy_default(opts.entry_maker, gen_from_ghq, opts)
 
